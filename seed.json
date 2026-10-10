@@ -1,0 +1,148 @@
+{
+  "records": [
+    {
+      "id": "rec_0001",
+      "description": "Lunch at cafeteria",
+      "amount": 2500,
+      "category": "Food",
+      "date": "2026-10-14",
+      "createdAt": "2026-10-14T09:00:00.000Z",
+      "updatedAt": "2026-10-14T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0002",
+      "description": "Chemistry textbook",
+      "amount": 45000,
+      "category": "Books",
+      "date": "2026-10-13",
+      "createdAt": "2026-10-13T09:00:00.000Z",
+      "updatedAt": "2026-10-13T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0003",
+      "description": "Bus pass",
+      "amount": 12000,
+      "category": "Transport",
+      "date": "2026-10-12",
+      "createdAt": "2026-10-12T09:00:00.000Z",
+      "updatedAt": "2026-10-12T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0004",
+      "description": "Coffee coffee with friends",
+      "amount": 3500.75,
+      "category": "Entertainment",
+      "date": "2026-10-12",
+      "createdAt": "2026-10-12T09:00:00.000Z",
+      "updatedAt": "2026-10-12T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0005",
+      "description": "Snacks (bulk) [x2]",
+      "amount": 4200,
+      "category": "Food",
+      "date": "2026-10-10",
+      "createdAt": "2026-10-10T09:00:00.000Z",
+      "updatedAt": "2026-10-10T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0006",
+      "description": "Library late fee",
+      "amount": 0.01,
+      "category": "Fees",
+      "date": "2026-10-09",
+      "createdAt": "2026-10-09T09:00:00.000Z",
+      "updatedAt": "2026-10-09T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0007",
+      "description": "Semester registration fees",
+      "amount": 99999.99,
+      "category": "Fees",
+      "date": "2026-10-08",
+      "createdAt": "2026-10-08T09:00:00.000Z",
+      "updatedAt": "2026-10-08T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0008",
+      "description": "Leap day notebook",
+      "amount": 1500,
+      "category": "Books",
+      "date": "2024-02-29",
+      "createdAt": "2024-02-29T09:00:00.000Z",
+      "updatedAt": "2024-02-29T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0009",
+      "description": "New year taxi",
+      "amount": 8000,
+      "category": "Transport",
+      "date": "2026-01-01",
+      "createdAt": "2026-01-01T09:00:00.000Z",
+      "updatedAt": "2026-01-01T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0010",
+      "description": "Year end gift",
+      "amount": 15000.5,
+      "category": "Other",
+      "date": "2025-12-31",
+      "createdAt": "2025-12-31T09:00:00.000Z",
+      "updatedAt": "2025-12-31T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0011",
+      "description": "Cinema night with tea and popcorn",
+      "amount": 6000,
+      "category": "Entertainment",
+      "date": "2026-10-11",
+      "createdAt": "2026-10-11T09:00:00.000Z",
+      "updatedAt": "2026-10-11T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0012",
+      "description": "Printing, binding and delivery of the final project report for the whole class",
+      "amount": 3000,
+      "category": "Other",
+      "date": "2026-10-09",
+      "createdAt": "2026-10-09T09:00:00.000Z",
+      "updatedAt": "2026-10-09T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0013",
+      "description": "Free career workshop",
+      "amount": 0,
+      "category": "Other",
+      "date": "2026-10-13",
+      "createdAt": "2026-10-13T09:00:00.000Z",
+      "updatedAt": "2026-10-13T09:00:00.000Z"
+    },
+    {
+      "id": "rec_0014",
+      "description": "Tea tea break after class",
+      "amount": 1000,
+      "category": "Food",
+      "date": "2026-10-14",
+      "createdAt": "2026-10-14T09:00:00.000Z",
+      "updatedAt": "2026-10-14T09:00:00.000Z"
+    }
+  ],
+  "settings": {
+    "baseCurrency": "RWF",
+    "displayCurrency": "RWF",
+    "rates": {
+      "USD": 0.00069,
+      "EUR": 0.00063
+    },
+    "categories": [
+      "Food",
+      "Books",
+      "Transport",
+      "Entertainment",
+      "Fees",
+      "Other"
+    ],
+    "cap": 250000,
+    "theme": "system"
+  }
+}

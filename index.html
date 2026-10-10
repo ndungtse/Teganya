@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teganya - Student Finance Tracker</title>
+  <meta name="description" content="Track student spending, search it with regular expressions and stay under a cap.">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/motion.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="#/dashboard">Teganya</a>
+    <button id="menu-toggle" class="icon-button menu-toggle" type="button" aria-expanded="false"
+      aria-controls="site-nav" aria-label="Open menu">
+      <span class="icon icon-menu" aria-hidden="true"></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary">
+      <ul class="nav-list nav-main">
+        <li><a href="#/dashboard">Dashboard</a></li>
+        <li><a href="#/records">Records</a></li>
+        <li><a href="#/form">Add record</a></li>
+        <li><a href="#/about">About</a></li>
+      </ul>
+      <ul class="nav-list nav-end">
+        <li><a href="#/settings"><span class="icon icon-gear" aria-hidden="true"></span>Settings</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section id="page-dashboard" aria-labelledby="dashboard-title">
+      <h1 id="dashboard-title" tabindex="-1">Dashboard</h1>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <h2>Records</h2>
+          <p id="stat-total" class="stat-value">0</p>
+        </div>
+        <div class="stat">
+          <h2>Total spent</h2>
+          <p id="stat-sum" class="stat-value">0</p>
+        </div>
+        <div class="stat">
+          <h2>Top category</h2>
+          <p id="stat-top" class="stat-value">None yet</p>
+        </div>
+      </div>
+
+      <section class="cap" aria-labelledby="cap-title">
+        <h2 id="cap-title">Spending cap</h2>
+        <div class="meter" aria-hidden="true">
+          <div id="cap-bar" class="meter-bar"></div>
+        </div>
+        <p id="cap-message">No cap set.</p>
+      </section>
+
+      <section aria-labelledby="trend-title">
+        <h2 id="trend-title">Last 7 days</h2>
+        <ol id="trend-chart" class="trend" aria-label="Spending per day for the last 7 days"></ol>
+      </section>
+    </section>
+
+    <section id="page-records" aria-labelledby="records-title" hidden>
+      <h1 id="records-title" tabindex="-1">Records</h1>
+
+      <form id="records-controls" class="controls" role="search" aria-label="Search and sort records">
+        <div class="field">
+          <label for="search-input">Search with a regular expression</label>
+          <input id="search-input" type="search" autocomplete="off" spellcheck="false" aria-describedby="search-error">
+          <p id="search-error" class="field-error" role="status"></p>
+        </div>
+        <div class="field field-inline">
+          <input id="search-ignore-case" type="checkbox" checked>
+          <label for="search-ignore-case">Ignore case</label>
+        </div>
+        <div class="field">
+          <label for="sort-select">Sort by</label>
+          <select id="sort-select">
+            <option value="date:desc">Date, newest first</option>
+            <option value="date:asc">Date, oldest first</option>
+            <option value="description:asc">Description, A to Z</option>
+            <option value="description:desc">Description, Z to A</option>
+            <option value="amount:asc">Amount, low to high</option>
+            <option value="amount:desc">Amount, high to low</option>
+          </select>
+        </div>
+      </form>
+
+      <p id="records-count" role="status"></p>
+
+      <div class="table-wrap">
+        <table id="records-table">
+          <caption class="visually-hidden">All spending records</caption>
+          <thead>
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Category</th>
+              <th scope="col">Date</th>
+              <th scope="col" class="num">Amount</th>
+              <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody id="records-body"></tbody>
+        </table>
+      </div>
+
+      <ul id="records-cards" class="cards"></ul>
+
+      <p id="records-empty" class="empty" hidden>
+        Nothing to show. <a href="#/form">Add a record</a> or clear the search.
+      </p>
+    </section>
+
+    <section id="page-form" aria-labelledby="form-title" hidden>
+      <h1 id="form-title" tabindex="-1">Add record</h1>
+
+      <form id="record-form" novalidate>
+        <input id="record-id" type="hidden">
+
+        <div class="field">
+          <label for="description">Description</label>
+          <input id="description" name="description" type="text" autocomplete="off"
+            aria-describedby="description-error description-note">
+          <p id="description-error" class="field-error"></p>
+          <p id="description-note" class="field-note" role="status"></p>
+        </div>
+
+        <div class="field">
+          <label for="amount">Amount (RWF)</label>
+          <input id="amount" name="amount" type="text" inputmode="decimal" autocomplete="off"
+            aria-describedby="amount-error">
+          <p id="amount-error" class="field-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" name="category" aria-describedby="category-error"></select>
+          <p id="category-error" class="field-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="date">Date</label>
+          <input id="date" name="date" type="date" aria-describedby="date-error">
+          <p id="date-error" class="field-error"></p>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="button button-primary">Save record</button>
+          <a class="button" href="#/records">Cancel</a>
+        </div>
+      </form>
+    </section>
+
+    <section id="page-settings" aria-labelledby="settings-title" hidden>
+      <h1 id="settings-title" tabindex="-1">Settings</h1>
+
+      <form id="settings-form" novalidate>
+        <fieldset>
+          <legend>Spending cap and currency</legend>
+          <div class="field">
+            <label for="cap-input">Spending cap (RWF)</label>
+            <input id="cap-input" type="text" inputmode="decimal" aria-describedby="cap-input-error">
+            <p id="cap-input-error" class="field-error"></p>
+          </div>
+          <div class="field">
+            <label for="display-currency">Show amounts in</label>
+            <select id="display-currency">
+              <option value="RWF">RWF</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Exchange rates for 1 RWF</legend>
+          <div class="field">
+            <label for="rate-usd">USD</label>
+            <input id="rate-usd" type="text" inputmode="decimal" aria-describedby="rate-usd-error">
+            <p id="rate-usd-error" class="field-error"></p>
+          </div>
+          <div class="field">
+            <label for="rate-eur">EUR</label>
+            <input id="rate-eur" type="text" inputmode="decimal" aria-describedby="rate-eur-error">
+            <p id="rate-eur-error" class="field-error"></p>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit" class="button button-primary">Save settings</button>
+        </div>
+      </form>
+
+      <section aria-labelledby="categories-title">
+        <h2 id="categories-title">Categories</h2>
+        <ul id="category-list" class="chips"></ul>
+        <form id="category-form" novalidate>
+          <div class="field">
+            <label for="category-input">New category</label>
+            <input id="category-input" type="text" autocomplete="off" aria-describedby="category-input-error">
+            <p id="category-input-error" class="field-error"></p>
+          </div>
+          <button type="submit" class="button">Add category</button>
+        </form>
+      </section>
+
+      <section aria-labelledby="data-title">
+        <h2 id="data-title">Your data</h2>
+        <div class="actions">
+          <button id="export-btn" type="button" class="button">Export JSON</button>
+          <label class="button" for="import-file">Import JSON</label>
+          <input id="import-file" class="visually-hidden" type="file" accept="application/json,.json">
+        </div>
+        <ul id="import-errors" class="field-error"></ul>
+      </section>
+
+      <section aria-labelledby="theme-title">
+        <h2 id="theme-title">Appearance</h2>
+        <div class="field">
+          <label for="theme-select">Theme</label>
+          <select id="theme-select">
+            <option value="system">Match system</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+      </section>
+    </section>
+
+    <section id="page-about" aria-labelledby="about-title" hidden>
+      <h1 id="about-title" tabindex="-1">About Teganya</h1>
+      <p>
+        Teganya is a small tool for students to record what they spend,
+        search it with regular expressions, see the last seven days at a glance and stay
+        under a cap they set themselves. Everything stays in your browser.
+      </p>
+      <h2>Contact</h2>
+      <ul>
+        <li>GitHub: <a href="https://github.com/ndungtse">ndungtse</a></li>
+        <li>Email: <a href="mailto:ndungutsecharles103@gmail.com">ndungutsecharles103@gmail.com</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Teganya, a student finance tracker.</p>
+  </footer>
+
+  <dialog id="delete-dialog" aria-labelledby="delete-title">
+    <form method="dialog">
+      <h2 id="delete-title">Delete this record?</h2>
+      <p id="delete-text"></p>
+      <div class="actions">
+        <button value="confirm" class="button button-danger">Delete</button>
+        <button value="cancel" class="button">Keep it</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="live-polite" class="visually-hidden" role="status" aria-live="polite"></div>
+  <div id="live-assertive" class="visually-hidden" role="alert" aria-live="assertive"></div>
+  <script type="module" src="scripts/main.js"></script>
+</body>
+
+</html>

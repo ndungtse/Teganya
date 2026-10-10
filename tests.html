@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teganya tests</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <style>
+    body { padding: var(--space-5); }
+    .pass { color: var(--color-accent); }
+    .fail { color: var(--color-danger); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Tests</h1>
+  <p id="summary" role="status"></p>
+  <ul id="results"></ul>
+  <script type="module">
+    import { render } from './tests/harness.js'
+    const files = ['validators', 'search', 'stats', 'currency', 'storage']
+    await Promise.all(files.map(name => import(`./tests/${name}.test.js`).catch(() => null)))
+    render(document.getElementById('results'), document.getElementById('summary'))
+  </script>
+</body>
+</html>
