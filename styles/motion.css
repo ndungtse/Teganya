@@ -1,0 +1,47 @@
+@media (prefers-reduced-motion: no-preference) {
+  .meter-bar {
+    transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1), background-color 200ms ease;
+  }
+
+  .trend-bar {
+    transition: height 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-list a,
+  .nav-list a::after {
+    transition: color 150ms ease, width 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .button,
+  .icon-button {
+    transition: border-color 150ms ease, background-color 150ms ease, transform 100ms ease;
+  }
+
+  .is-new {
+    animation: record-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .is-leaving {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+
+  dialog[open] {
+    animation: dialog-in 160ms ease-out;
+  }
+}
+
+@keyframes record-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
