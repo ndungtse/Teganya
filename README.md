@@ -2,6 +2,8 @@
 
 Teganya is a small app for students to record spending, search it with regular expressions, see the last seven days at a glance and stay under a spending cap. It is built with vanilla HTML, CSS and JavaScript (ES modules), with no frameworks and no backend. Everything is stored in your browser.
 
+### [Find Youtube Demo Here](https://youtu.be/4wRdbTwPscI)
+
 **Theme:** Student Finance Tracker
 **Live site (GitHub Pages):** https://ndungtse.github.io/Teganya/
 **Contact:** see the About page inside the app
