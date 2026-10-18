@@ -32,6 +32,29 @@
   }
 }
 
+@media (prefers-reduced-motion: no-preference) and (max-width: 767.98px) {
+  .site-nav {
+    transition: clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 320ms;
+  }
+
+  .site-nav.is-open {
+    transition: clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
+  }
+
+  .site-nav .nav-list {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 200ms ease, transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .site-nav.is-open .nav-list {
+    opacity: 1;
+    transform: none;
+    transition-delay: 80ms;
+  }
+}
+
+
 @keyframes record-in {
   from {
     opacity: 0;
